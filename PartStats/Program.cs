@@ -1,19 +1,46 @@
-﻿using System;
-
-namespace PartStats
+﻿namespace PartStats
 {
-    class Program
+    using PartStats.Workers.FileSystem;
+    using PartStats.Workers.Http;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
+    internal class Program
     {
-        static async System.Threading.Tasks.Task Main(string[] args)
+        private static void Main(string[] args)
         {
-            if(string.Equals(args[0].ToLowerInvariant(), "filesystem"))
+            List<Task> list = new List<Task>();
+            if (string.Equals(args[0].ToLowerInvariant(), "filesystem"))
             {
-                for(uint i = 1; i < args.Length; i++)
+                for (uint i = 1; i < args.Length; i++)
                 {
                     var worker = new FileSystemWorker();
-                    var result = await worker.ProcessDataAsync(args[i]);
+                    list.Add(worker.ProcessDataAsync(args[i]));
                 }
             }
+            else if (string.Equals(args[0].ToLowerInvariant(), "http"))
+            {
+                for (uint i = 1; i < args.Length; i++)
+                {
+                    var worker = new HttpWorker();
+                    list.Add(worker.ProcessDataAsync(args[i]));
+                }
+            }
+            else
+            {
+                Console.WriteLine("Incorrect \"input_mode\". Please check: filesystem or http.");
+                Console.ReadKey();
+                return;
+            }
+
+            HandleResult(list);
+        }
+
+        private static async void HandleResult(IList<Task> tasks)
+        {
+            await Task.WhenAll(tasks);
+            await OutputHandler.WriteOutputFileAsync();
         }
     }
 }
