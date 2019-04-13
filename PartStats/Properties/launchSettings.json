@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PartStats": {
+      "commandName": "Project",
+      "commandLineArgs": "filesystem C:\\Temp\\TestFolder C:\\Temp\\TestFolder2"
+    }
+  }
+}

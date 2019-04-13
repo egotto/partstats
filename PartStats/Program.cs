@@ -35,6 +35,9 @@
             }
 
             HandleResult(list);
+            Console.WriteLine("Work is done. Check output file: output.txt");
+            Console.WriteLine("Press any key for close");
+            Console.ReadKey();
         }
 
         private static async void HandleResult(IList<Task> tasks)

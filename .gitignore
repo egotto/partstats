@@ -1,2 +1,4 @@
 .vs/
 PartStats/obj/
+PartStats/bin/
+*.user
