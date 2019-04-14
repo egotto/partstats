@@ -35,6 +35,7 @@
             }
 
             HandleResult(list);
+            Collector.Clear();
             Console.WriteLine("Work is done. Check output file: output.txt");
             Console.WriteLine("Press any key for close");
             Console.ReadKey();

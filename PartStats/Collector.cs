@@ -2,11 +2,11 @@
 
 namespace PartStats
 {
-    internal static class Collector
+    public static class Collector
     {
         private static Dictionary<string, uint> result = new Dictionary<string, uint>();
 
-        internal static void AddItem(Item item)
+        public static void AddItem(Item item)
         {
             item.Name = item.Name.ToLowerInvariant();
             if (result.ContainsKey(item.Name))
@@ -19,7 +19,7 @@ namespace PartStats
             }
         }
 
-        internal static void AddRangeItems(IEnumerable<Item> items)
+        public static void AddRangeItems(IEnumerable<Item> items)
         {
             foreach (Item item in items)
             {
@@ -27,12 +27,12 @@ namespace PartStats
             }
         }
 
-        internal static Dictionary<string, uint> GetResult()
+        public static Dictionary<string, uint> GetResult()
         {
             return result;
         }
 
-        internal static uint GetCountByName(string name)
+        public static uint GetCountByName(string name)
         {
             if (result.ContainsKey(name.ToLowerInvariant()))
             {
@@ -42,6 +42,11 @@ namespace PartStats
             {
                 return 0;
             }
+        }
+
+        public static void Clear()
+        {
+            result.Clear();
         }
     }
 }

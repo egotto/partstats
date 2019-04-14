@@ -1,6 +1,6 @@
 ﻿namespace PartStats
 {
-    internal class Item
+    public class Item
     {
         public Item(string line)
         {

@@ -2,3 +2,5 @@
 PartStats/obj/
 PartStats/bin/
 *.user
+UnitTest/bin/
+UnitTest/obj/
