@@ -2,7 +2,8 @@
   "profiles": {
     "PartStats": {
       "commandName": "Project",
-      "commandLineArgs": "filesystem C:\\Temp\\TestFolder C:\\Temp\\TestFolder2"
+      //"commandLineArgs": "filesystem C:\\Temp\\TestFolder C:\\Temp\\TestFolder2"
+      "commandLineArgs": "http http://127.0.0.1:10000/devstoreaccount1/files/Source.txt"
     }
   }
 }

@@ -47,7 +47,7 @@ namespace PartStats.Workers.Http
 
         private async Task ProcessLineUrlAsync(Task<string> task)
         {
-            var tempFileName = new Guid() + ".txt";
+            var tempFileName = DateTime.Now.Ticks.ToString() + ".txt";
             try
             {
                 using (WebClient wc = new WebClient())
