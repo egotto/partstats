@@ -16,45 +16,27 @@ namespace PartStats.Workers.FileSystem
             }
 
             var directories = Directory.GetDirectories(path);
-            if(directories != null && directories.Length > 0)
+            if (directories != null && directories.Length > 0)
             {
-                foreach(var dir in directories)
+                foreach (var dir in directories)
                 {
                     ProcessDataAsync(dir);
                 }
             }
 
             var files = Directory.GetFiles(path);
-            if(files != null && files.Length > 0)
+            if (files != null && files.Length > 0)
             {
                 List<Task> tasks = new List<Task>();
-                foreach(var file in files)
+                foreach (var file in files)
                 {
-                    tasks.Add(ReadFileAsync(file));
+                    tasks.Add(FileHelper.ReadFileAsync(file));
                 }
 
                 return Task.WhenAll(tasks);
             }
 
             return Task.CompletedTask;
-        }
-
-        async Task ReadFileAsync(string path)
-        {
-            try
-            {
-                using(StreamReader reader = new StreamReader(path, System.Text.Encoding.UTF8))
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        Collector.AddItem(new Item(await reader.ReadLineAsync()));
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine($"Error in file: {path}. {ex.Message}");
-            }
         }
     }
 }
